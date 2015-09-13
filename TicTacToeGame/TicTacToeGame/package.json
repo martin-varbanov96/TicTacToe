@@ -1,0 +1,10 @@
+{
+  "name": "TicTacToeGame",
+  "version": "0.0.0",
+  "description": "TicTacToeGame",
+  "main": "app.js",
+  "author": {
+    "name": "hp",
+    "email": ""
+  }
+}
