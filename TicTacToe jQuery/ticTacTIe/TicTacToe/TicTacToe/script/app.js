@@ -3,7 +3,7 @@
 });
 
 function game() {
-    var turn = 0;
+    var step = 0;
     var winBool = false;
 
     $('.freeSpot').click(function () {
@@ -18,7 +18,7 @@ function game() {
         botTurn();
     });
 
-    //TODO- finish for every turn
+    //The bot's turn    
     function botTurn() {
         var Q = $('#Q').text();
         var W = $('#W').text();
@@ -34,59 +34,171 @@ function game() {
             $("#S").html("O");
             return;
         }
-        else {
+        if (isFilled(S)) {
             checkWinMove();
         }
         if (checkWin()) { 
             alert("bot win hue hue hue ");
         }
         
-        function casualMove() {
-             if ((Q != "X") && (isFilled(Q) == false)) {
-                $("#Q").attr("class", 'botMarked');
-                $("#Q").html("O");
-                return;
-            }
-            else if ((E != "X") && (isFilled(E) == false)) {
+        function checkWinMove() {
+            //qwe win 
+            if ((Q == "O") && (W == "O") && (isFilled(E) == false)) {
                 $("#E").attr("class", 'botMarked');
                 $("#E").html("O");
                 return;
             }
-            else if ((C != "X") && (isFilled(C) == false)) {
-                $("#C").attr("class", 'botMarked');
-                $("#C").html("O");
+            else if ((W == "O") && (E == "O") && (isFilled(Q) == false)) {
+                $("#Q").attr("class", 'botMarked');
+                $("#Q").html("O");
                 return;
             }
-            else if ((Z != "X") && (isFilled(Z) == false)) {
-                $("#Z").attr("class", 'botMarked');
-                $("#Z").html("O");
-                return;
-            }
-            else if ((X != "X") && (isFilled(X) == false)) {
-                $("#X").attr("class", 'botMarked');
-                $("#X").html("O");
-                return;
-            }
-            else if ((D != "X") && (isFilled(D) == false)) {
-                $("#D").attr("class", 'botMarked');
-                $("#D").html("O");
-                return;
-            }
-            else if ((W != "X") && (isFilled(W) == false)) {
+            else if ((Q == "O") && (E == "O") && (isFilled(W) == false)) {
                 $("#W").attr("class", 'botMarked');
                 $("#W").html("O");
                 return;
             }
-            else if ((A != "X") && (isFilled(A) == false)) {
+            //asd win
+            else if ((A == "O") && (S == "O") && (isFilled(D) == false)) {
+                $("#D").attr("class", 'botMarked');
+                $("#D").html("O");
+                return;
+            }
+            else if ((S == "O") && (D == "O") && (isFilled(A) == false)) {
                 $("#A").attr("class", 'botMarked');
                 $("#A").html("O");
                 return;
             }
-            
+            //zxc win
+            else if ((Z == "O") && (X == "O") && (isFilled(C) == false)) {
+                $("#C").attr("class", 'botMarked');
+                $("#C").html("O");
+                return;
+            }
+            else if ((Z == "O") && (C == "O") && (isFilled(X) == false)) {
+                $("#X").attr("class", 'botMarked');
+                $("#X").html("O");
+                return;
+            }
+            else if ((X == "O") && (C == "O") && (isFilled(Z) == false)) {
+                $("#Z").attr("class", 'botMarked');
+                $("#Z").html("O");
+                return;
+            }
+        //qaz win
+            else if ((Q == "O") && (A == "O") && (isFilled(Z) == false)) {
+                $("#Z").attr("class", 'botMarked');
+                $("#Z").html("O");
+                return;
+            }
+            else if ((A == "O") && (Z == "O") && (isFilled(Q) == false)) {
+                $("#Q").attr("class", 'botMarked');
+                $("#Q").html("O");
+                return;
+            }
+            else if ((Q == "O") && (Z == "O") && (isFilled(A) == false)) {
+                $("#A").attr("class", 'botMarked');
+                $("#A").html("O");
+                return;
+            }
+        //wsx win
+            else if ((W == "O") && (S == "O") && (isFilled(X) == false)) {
+                $("#X").attr("class", 'botMarked');
+                $("#X").html("O");
+                return;
+            }
+            else if ((S == "O") && (X == "O") && (isFilled(W) == false)) {
+                $("#W").attr("class", 'botMarked');
+                $("#W").html("O");
+                return;
+            }
+        // EDC win       
+            else if ((E == "O") && (D == "O") && (isFilled(C) == false)) {
+                $("#C").attr("class", 'botMarked');
+                $("#C").html("O");
+                return;
+            }
+            else if ((E == "O") && (C == "O") && (isFilled(D) == false)) {
+                $("#D").attr("class", 'botMarked');
+                $("#D").html("O");
+                return;
+            }
+            else if ((D == "O") && (C == "O") && (isFilled(E) == false)) {
+                $("#E").attr("class", 'botMarked');
+                $("#E").html("O");
+                return;
+            }
+        //qsc win
+        
+            else if ((Q == "O") && (S == "O") && (isFilled(C) == false)) {
+                $("#C").attr("class", 'botMarked');
+                $("#C").html("O");
+                return;
+            }
+            else if ((S == "O") && (C == "O") && (isFilled(Q) == false)) {
+                $("#Q").attr("class", 'botMarked');
+                $("#Q").html("O");
+                return;
+            }
+        // zse win
+        
+            else if ((Z == "O") && (S == "O") && (isFilled(E) == false)) {
+                $("#E").attr("class", 'botMarked');
+                $("#E").html("O");
+                return;
+            }
+            else if ((S == "O") && (E == "O") && (isFilled(Z) == false)) {
+                $("#Z").attr("class", 'botMarked');
+                $("#Z").html("O");
+                return;
+            }
+            else {                
+                predictPlayerWin();
+            }
+        }
+        function predictPlayerWin() {
+            if (((W == "") || (D == "") || (X == "") || (A == ""))) {
+                if ((Q == "X") && (C == "X") && (step == 0)) {
+                    step++;
+                    fillSideSpots();
+                    return;
+                }
+                if ((Z == "X") && (E == "X") && (step == 0)) {
+                    step++;
+                    fillSideSpots();
+                    return;
+                }                
+            else {
+                checkPlayerWin();
+            }
+         }
+
+            function fillSideSpots() {                 
+                if ((isFilled(X) == false)) {
+                    $("#X").attr("class", 'botMarked');
+                    $("#X").html("O");
+                    return;
+                }                
+                else if ((isFilled(D) == false)) {
+                    $("#D").attr("class", 'botMarked');
+                    $("#D").html("O");
+                    return;
+                }        
+                else if ((isFilled(W) == false)) {
+                    $("#W").attr("class", 'botMarked');
+                    $("#W").html("O");
+                    return;
+                }        
+                else if ((isFilled(A) == false)) {
+                    $("#A").attr("class", 'botMarked');
+                    $("#A").html("O");
+                    return;
+                }
+            }
         }
         function checkPlayerWin() {
             //qwe win 
-            if ((Q == "O") && (W == "X") && (isFilled(E) == false)) {
+            if ((Q == "X") && (W == "X") && (isFilled(E) == false)) {
                 $("#E").attr("class", 'botMarked');
                 $("#E").html("O");
                 return;
@@ -200,124 +312,51 @@ function game() {
                 casualMove();
             }
         } 
-        function checkWinMove() {
-            //qwe win 
-            if ((Q == "O") && (W == "O") && (isFilled(E) == false)) {
-                $("#E").attr("class", 'botMarked');
-                $("#E").html("O");
-                return;
-            }
-            else if ((W == "O") && (E == "O") && (isFilled(Q) == false)) {
+        function casualMove() {
+             if ((Q != "X") && (isFilled(Q) == false)) {
                 $("#Q").attr("class", 'botMarked');
                 $("#Q").html("O");
                 return;
             }
-            else if ((Q == "O") && (E == "O") && (isFilled(W) == false)) {
-                $("#W").attr("class", 'botMarked');
-                $("#W").html("O");
+            else if ((E != "X") && (isFilled(E) == false)) {
+                $("#E").attr("class", 'botMarked');
+                $("#E").html("O");
                 return;
             }
-            //asd win
-            else if ((A == "O") && (S == "O") && (isFilled(D) == false)) {
-                $("#D").attr("class", 'botMarked');
-                $("#D").html("O");
-                return;
-            }
-            else if ((S == "O") && (D == "O") && (isFilled(A) == false)) {
-                $("#A").attr("class", 'botMarked');
-                $("#A").html("O");
-                return;
-            }
-            //zxc win
-            else if ((Z == "O") && (X == "O") && (isFilled(C) == false)) {
+            else if ((C != "X") && (isFilled(C) == false)) {
                 $("#C").attr("class", 'botMarked');
                 $("#C").html("O");
                 return;
             }
-            else if ((Z == "O") && (C == "O") && (isFilled(X) == false)) {
+            else if ((Z != "X") && (isFilled(Z) == false)) {
+                $("#Z").attr("class", 'botMarked');
+                $("#Z").html("O");
+                return;
+            }
+            else if ((X != "X") && (isFilled(X) == false)) {
                 $("#X").attr("class", 'botMarked');
                 $("#X").html("O");
                 return;
             }
-            else if ((X == "O") && (C == "O") && (isFilled(Z) == false)) {
-                $("#Z").attr("class", 'botMarked');
-                $("#Z").html("O");
-                return;
-            }
-        //qaz win
-            else if ((Q == "O") && (A == "O") && (isFilled(Z) == false)) {
-                $("#Z").attr("class", 'botMarked');
-                $("#Z").html("O");
-                return;
-            }
-            else if ((A == "O") && (Z == "O") && (isFilled(Q) == false)) {
-                $("#Q").attr("class", 'botMarked');
-                $("#Q").html("O");
-                return;
-            }
-            else if ((Q == "O") && (Z == "O") && (isFilled(A) == false)) {
-                $("#A").attr("class", 'botMarked');
-                $("#A").html("O");
-                return;
-            }
-        //wsx win
-            else if ((W == "O") && (S == "O") && (isFilled(X) == false)) {
-                $("#X").attr("class", 'botMarked');
-                $("#X").html("O");
-                return;
-            }
-            else if ((S == "O") && (X == "O") && (isFilled(W) == false)) {
-                $("#W").attr("class", 'botMarked');
-                $("#W").html("O");
-                return;
-            }
-        // EDC win
-        
-            else if ((E == "O") && (D == "O") && (isFilled(C) == false)) {
-                $("#C").attr("class", 'botMarked');
-                $("#C").html("O");
-                return;
-            }
-            else if ((E == "O") && (C == "O") && (isFilled(D) == false)) {
+            else if ((D != "X") && (isFilled(D) == false)) {
                 $("#D").attr("class", 'botMarked');
                 $("#D").html("O");
                 return;
             }
-            else if ((D == "O") && (C == "O") && (isFilled(E) == false)) {
-                $("#E").attr("class", 'botMarked');
-                $("#E").html("O");
+            else if ((W != "X") && (isFilled(W) == false)) {
+                $("#W").attr("class", 'botMarked');
+                $("#W").html("O");
                 return;
             }
-        //qsc win
-        
-            else if ((Q == "O") && (S == "O") && (isFilled(C) == false)) {
-                $("#C").attr("class", 'botMarked');
-                $("#C").html("O");
+            else if ((A != "X") && (isFilled(A) == false)) {
+                $("#A").attr("class", 'botMarked');
+                $("#A").html("O");
                 return;
             }
-            else if ((S == "O") && (C == "O") && (isFilled(Q) == false)) {
-                $("#Q").attr("class", 'botMarked');
-                $("#Q").html("O");
-                return;
-            }
-        // zse win
-        
-            else if ((Z == "O") && (S == "O") && (isFilled(E) == false)) {
-                $("#E").attr("class", 'botMarked');
-                $("#E").html("O");
-                return;
-            }
-            else if ((S == "O") && (E == "O") && (isFilled(Z) == false)) {
-                $("#Z").attr("class", 'botMarked');
-                $("#Z").html("O");
-                return;
-            }
-            else { 
-                checkPlayerWin();
-            }
+            
         }
     }
-    
+
     // checks is value is filled returns bool
     function isFilled(val) {
         if ((val == "X") || (val == "O")) {
