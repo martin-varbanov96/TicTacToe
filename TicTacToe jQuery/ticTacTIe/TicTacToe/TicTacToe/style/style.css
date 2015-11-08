@@ -1,6 +1,9 @@
-﻿td {
-    width: 50px;
-    height: 50px;
+﻿body {
+    background-color: #CC9;
+}
+td {
+    width: 100px;
+    height: 100px;
     border: 1px solid black;
     padding: 5px;
     margin: 0px;
@@ -17,18 +20,48 @@ table {
 .marked {
     background-color: #5F5;
     color: #FF0;
-    font-size: 30px;
+    font-size: 50px;
     text-align: center;
 }
 .freeSpot {
     background-color: #55F;
     color: #F55;
-    font-size: 30px;
+    font-size: 50px;
     text-align: center;
 }
 .botMarked {
     background-color: #F55;
     color: #55F;
+    font-size: 50px;
+    text-align: center;
+}
+button {
+    margin: 5px;
+    width: 330px;
+    height: 50px;
+    border-radius: 10px;
+    color: #DD4;
+    text-shadow: 2px 2px whitesmoke;
+    font-weight: bold;
     font-size: 30px;
     text-align: center;
+    text-decoration: solid;
+    margin-left: 510px;
+    background-color: #DDD;
+    border: 1px solid black;
+
+}
+#scoreBoard {
+    border: 1px solid black;
+    width: 320px;
+    height: 150px;
+    border-radius: 10px;    
+    color: #DD4;
+    text-shadow: 2px 2px whitesmoke;
+    font-weight: bold;
+    font-size: 30px;
+    text-decoration: solid;
+    margin-left: 510px;
+    background-color: #DDD;
+
 }

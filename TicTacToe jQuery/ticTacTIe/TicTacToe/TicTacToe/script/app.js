@@ -1,10 +1,17 @@
 ﻿$(document).ready(function () {
     game();
+    $("button").click(function () { 
+        reset();
+    });
 });
 
 function game() {
     var step = 0;
     var winBool = false;
+    var drawCount = 0;
+    var playerCount = 0;
+    var botWin = 0;
+    var isDrawOutput = false;
 
     $('.freeSpot').click(function () {
         if ($(this).attr("class") == "freeSpot") { 
@@ -12,12 +19,18 @@ function game() {
             $(this).html("X");
             winBool = checkWin();
             if (winBool == true) {
-                alert("Player wins");
+                playerCount++;
+                $('#playerWin').text("Player wins: " + playerCount);
+                reset();
+            }      
+            botTurn();
+            if (isDraw()) { 
+                drawCount++;
+                $('#draw').text("Draw: " + drawCount);
+                reset();
             }
         }
-        botTurn();
     });
-
     //The bot's turn    
     function botTurn() {
         var Q = $('#Q').text();
@@ -37,10 +50,11 @@ function game() {
         if (isFilled(S)) {
             checkWinMove();
         }
-        if (checkWin()) { 
-            alert("bot win hue hue hue ");
-        }
-        
+        if (checkWin()) {
+            botWin++;
+            $('#botWin').html("Bot wins: " + botWin);
+            reset();
+        }        
         function checkWinMove() {
             //qwe win 
             if ((Q == "O") && (W == "O") && (isFilled(E) == false)) {
@@ -356,6 +370,27 @@ function game() {
             
         }
     }
+    
+    //Checks if game is draw
+    function isDraw() {
+        var Q = $('#Q').text();
+        var W = $('#W').text();
+        var E = $('#E').text();
+        var A = $('#A').text();
+        var S = $('#S').text();
+        var D = $('#D').text();
+        var Z = $('#Z').text();
+        var X = $('#X').text();
+        var C = $('#C').text();
+
+        if ((Q != "") && (W != "") && (E != "") &&
+            (A != "") && (S != "") && (D != "") &&
+            (Z != "") && (X != "") && (C != "")
+            ) {
+            return true;
+        }
+        return false;
+    }
 
     // checks is value is filled returns bool
     function isFilled(val) {
@@ -390,5 +425,28 @@ function game() {
         }
         return false;
 
-    }       
+    }  
 }
+
+//resets the game with null values and freeSpot classes
+function reset() {
+    $('#Q').text("");
+    $('#W').text("");
+    $('#E').text("");
+    $('#A').text("");
+    $('#S').text("");
+    $('#D').text("");
+    $('#Z').text("");
+    $('#X').text("");
+    $('#C').text("");
+    $('#Q').attr("class", "freeSpot");
+    $('#W').attr("class", "freeSpot");
+    $('#E').attr("class", "freeSpot");
+    $('#A').attr("class", "freeSpot");
+    $('#S').attr("class", "freeSpot");
+    $('#D').attr("class", "freeSpot");
+    $('#Z').attr("class", "freeSpot");
+    $('#X').attr("class", "freeSpot");
+    $('#C').attr("class", "freeSpot");
+
+}     
