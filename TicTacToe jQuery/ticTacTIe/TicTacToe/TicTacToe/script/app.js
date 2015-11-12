@@ -1,7 +1,10 @@
-﻿$(document).ready(function () {
+$(document).ready(function () {
     game();
-    $("button").click(function () { 
-        reset();
+    $("button").click(function () {
+        var a = confirm("Are you sure you want to reset?");
+        if(a == true){
+            reset();
+        }
     });
 });
 
